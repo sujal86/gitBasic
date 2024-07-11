@@ -1,0 +1,141 @@
+FYI Important commands for GIT
+
+- Git setup
+    git config --global user.name "username"
+    git config --global user.email “test@email.com”
+
+- Check globally set GIT user
+    git config user.name
+    git config user.email
+
+- Create new ssh key in Mac OR Linux
+    ssh-keygen -t rsa
+
+- Find public key in id_rsa.pub
+    open ~/.ssh
+
+- To copy directly without open file
+    cat ~/.ssh/id_rsa.pub | pbcopy
+
+- To add existing REPO to the remote REPO
+    git remote add origin git@github.com:sujal86/gitBasic.git
+        connect local repo with the remote repo
+    git branch -M main
+        -M will rename the brach name
+            suppose you are on branch name abc and want to rename with xyz than
+            git checkout abc and than git branch -M xyz
+        
+        git push -u origin xyz
+
+- To Add file/s 
+    git add "filename" OR
+    git add .
+
+- Create new branch locally 
+    git checkout -b branchName
+
+- To checkout newly created branch 
+    git checkout branchName
+
+- To checkout exisitng remote branch
+    git checkout --track origin/branchName
+
+- To commit message 
+    First add the files which has changes 
+    than git commit -m "commit custom message"
+
+- To Push changes to remote branch 
+    git push
+
+- To remove local commit (un-pushed)
+    git reset --soft HEAD^
+
+- After local merge when OS is Mac M1
+    Esc -> : -> wq -> Enter
+
+- To revert exisiting commit
+    git revert <commit-hash>
+
+    To perform this action always first create new branch and
+    than perform this changes and once verified changes merged in original branch
+
+- To Merge another branch to current branch 
+    checkout to branch you want merge into current branch 
+        git checkout main
+    than take a pull
+        git pull
+    
+    Now checkout to your current branch 
+        git checkout feature/xyz
+    
+    Now do 
+        git merge branchName
+            fix the conflicts and do commit push
+        In conflicts when its say current chnges that means 
+            the code of the current branch
+        and when they say incoming chnages 
+            that means the changes comming from the branch which you merging 
+
+- To Merge parent branch (use case)
+    Currently working on branch
+    git checkout feature/xyz (currently working on branch)
+
+    - Fetch the latest changes from the remote main branch
+    git fetch origin main
+
+    - Merge changes from main into feature/xyz with a merge commit (--no-ff)
+    git merge --no-ff origin/main (Without custom message)
+
+    git merge --no-ff -m "Merge changes from main into feature/xyz" origin/main (With custom message)
+
+- When Local changes are there and branch has new pushed to take a pull before commit 
+    Git stash —> set local changes as anonymous
+    Git fetch —> fetch all changes
+    Git pull —> get changes in branch
+    Git stash pop —> set back locks changes made back to files
+
+- It will remove the last local (unpushed) commit, 
+    but will keep changes you have done.
+    git reset --soft HEAD^
+
+- For checkout particular commit
+    git checkout (commit ID) find it from git log
+
+- To re-checkout
+    git switch -
+
+    Switch from 'feature-x' to 'main'
+        git switch main
+
+    Do some work on 'main' branch
+    Now switch back to 'feature-x'
+        git switch -
+
+- Delete branch locally
+    git branch -d <branch name>
+
+    git branch -d <branch name>: Deletes the specified branch <branch name> from your local repository 
+    if it has been fully merged into the current branch.
+    
+    git branch -D <branch name>: Forces deletion of the specified branch <branch name>, 
+    even if it contains unmerged changes.
+
+- Cherrypick
+    git cherry-pick commitSHA (With commit message)
+    git cherry-pick --no-commit commitSHA (Without commit messages)
+
+- How to add file in git ignore which is already exist in REPO
+    - Add in .gitignore file
+        - android/gradle.properties
+        - gradle.properties
+
+    - Un-track file command
+        - git update-index --assume-unchanged android/gradle.properties
+    - Re-track file command
+        - git update-index --no-assume-unchanged android/gradle.properties
+
+- List untracked files and directories to be deleted (dry run)
+    git clean -dfn
+
+- Actually delete untracked files and directories
+    git clean -df
